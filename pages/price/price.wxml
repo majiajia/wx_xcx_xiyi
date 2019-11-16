@@ -1,0 +1,545 @@
+<!-- 价目表页面:上面是滑动的,选中后,下面的内容随之更新 -->
+<view style='display:flex;flex-direction:row;justify-content:space-around;align-items:center;padding-left:3%;padding-right:3%;border-bottom:1rpx solid #333;padding-bottom:12rpx;'>
+    <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;' bindtap='show_by_type' data-type="1">
+        <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;'>
+            <image style='width:40rpx;height:40rpx;' src='../../imgs/cloth/cloth.png'></image>
+            <block wx:if="{{cloth_selected}}">
+                <text style="color:red;">服饰</text>
+            </block>
+            <block wx:else>
+                <text>服饰</text>
+            </block>
+        </view>
+    </view>
+    <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;' bindtap='show_by_type' data-type="2">
+        <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;'>
+            <image style='width:40rpx;height:40rpx;' src='../../imgs/cloth/jiaju.png'></image>
+            <block wx:if="{{jiaju_selected}}">
+                <text style="color:red;">家居</text>
+            </block>
+            <block wx:else>
+                <text>家居</text>
+            </block>
+        </view>
+    </view>
+    <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;' bindtap='show_by_type' data-type="3">
+        <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;'>
+            <image style='width:40rpx;height:40rpx;' src='../../imgs/cloth/shoe.png'></image>
+            <block wx:if="{{shoe_selected}}">
+                <text style="color:red;">鞋</text>
+            </block>
+            <block wx:else>
+                <text>鞋</text>
+            </block>
+        </view>
+    </view>
+    <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;' bindtap='show_by_type' data-type="4">
+        <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;'>
+            <image style='width:40rpx;height:40rpx;' src='../../imgs/cloth/bao.png'></image>
+            <block wx:if="{{bag_selected}}">
+                <text style="color:red;">包</text>
+            </block>
+            <block wx:else>
+                <text>包</text>
+            </block>
+        </view>
+    </view>
+    <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;' bindtap='show_by_type' data-type="5">
+        <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;'>
+            <image style='width:40rpx;height:40rpx;' src='../../imgs/cloth/piyi.png'></image>
+            <block wx:if="{{picao_selected}}">
+                <text style="color:red;">皮草</text>
+            </block>
+            <block wx:else>
+                <text>皮草</text>
+            </block>
+        </view>
+    </view>
+    <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;' bindtap='show_by_type' data-type="6">
+        <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;'>
+            <image style='width:40rpx;height:40rpx;' src='../../imgs/cloth/ranse.png'></image>
+            <block wx:if="{{ranse_selected}}">
+                <text style="color:red;">染色</text>
+            </block>
+            <block wx:else>
+                <text>染色</text>
+            </block>
+        </view>        
+    </view>
+</view>
+
+
+<!-- 服饰洗涤类 -->
+<view wx:if="{{type == 1}}">
+    <view  class="table" style='margin-top:60rpx;'>
+        <view class="tr tr_title">
+            服饰类洗涤价格[以件为单位]
+        </view>
+        <view class="tr bg-w">
+            <view class="th width1">价格</view>
+            <view class="th width2">项目</view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width1">
+                <view class="tdd2">12</view>
+                <view class="tdd2">16</view>
+                <view class="tdd2">20</view>
+                <view class="tdd2">25</view>
+                <view class="tdd2">29</view>
+                <view class="tdd2">39</view>
+                <view class="tdd2">49</view>
+                <view class="tdd2">60</view>
+                <view class="tdd2">80</view>
+                <view class="tdd2 border-none">120起</view>
+            </view>
+            <view class="td width2">
+                <view class="tdd2" bindtap="show_more_cloth" data-id="1">领带、薄马夹、布艺腰带、秋衣、秋裤</view>
+                <view class="tdd2" bindtap="show_more_cloth"  data-id="2">西裤、T恤、衬衣、单裙、休闲裤、牛仔裤</view>
+                <view class="tdd2"  bindtap="show_more_cloth"  data-id="3">西服上衣、夹克、毛衫、羊毛衬衣</view>
+                <view class="tdd2"  bindtap="show_more_cloth"  data-id="4">厚裙、羊绒毛、毛围巾、绒裤</view>
+                <view class="tdd2"  bindtap="show_more_cloth"  data-id="5">外套(厚、双面)、羽绒服(短)、棉衣(短)</view>
+                <view class="tdd2"  bindtap="show_more_cloth"  data-id="6">羽绒服(中)、棉衣(中)、羊毛外套(短)</view>
+                <view class="tdd2"  bindtap="show_more_cloth"  data-id="7">羽绒服(长)、棉衣(长)、羊绒/毛外套(中)</view>
+                <view class="tdd2" bindtap="show_more_cloth"  data-id="8">羊绒/毛外套(长)、PU棉衣、旗袍、羊毛内胆袄(大)</view>
+                <view class="tdd2"  bindtap="show_more_cloth"  data-id="9">丝质旗袍、厚真丝礼服等</view>
+                <view class="tdd2 border-none"  bindtap="show_more_cloth"  data-id="10">婚纱、礼服、特殊衣物类</view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 服饰类注意事项 -->
+    <view style='margin-top:30rpx;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding-left:2%;padding-right:2%;font-size:28rpx;padding-bottom:20rpx;'>
+        <text>注意事项:</text>
+        <text>1.外套和特殊洗涤类中80CM以下为短,80-100CM为中,100CM以上为长.</text>
+        <text>2.超过2000元的高档衣物建议保值清洗,洗衣价格为保质金额的5%,未声明保值洗衣的衣物如出现洗涤事故,赔偿金额不超过2000元.</text>
+        <text>3.衣物带有毛领其毛领按照皮草类另行计价.</text>
+        <text>4.织补、单烫、皮衣粘补等特殊服务不打折(单烫按照衣服洗涤价格的50%收取).去渍类声明保值按10%收取,白色保值衣物不足40元按照40元收取,有色衣物保值不足80元按照80元收取.</text>
+    </view>
+</view>
+
+<!-- 家具类 -->
+<view wx:elif="{{type == 2}}">
+    <view class="table" style='margin-top:60rpx;'>
+        <view class="tr tr_title">家居类洗涤价格</view>
+        <view class="tr bg-w">
+            <view class="th width3">价格</view>
+            <view class="th width3">单位</view>
+            <view class="th width4">项目</view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width3">8</view>
+            <view class="td width3 td_center">元/个</view>
+            <view class="td width4">枕套、枕巾等</view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width3">
+                <view class="tdd2">15</view>
+                <view class="tdd2">20</view>
+                <view class="tdd2">25</view>
+                <view class="tdd2">40</view>
+                <view class="tdd2">60</view>
+                <view class="tdd2">100</view>
+                <view class="tdd2">120</view>
+                <view class="tdd2">200</view>
+                <view class="tdd2">30-200</view>
+                <view class="tdd2 border-none">300元起</view>
+            </view>
+            <view class="td width3 td_center">件</view>
+            <view class="td width4">
+                <view class="tdd2">床单(小)、毛巾被(小)</view>
+                <view class="tdd2">床单(大)、毛巾被(大)</view>
+                <view class="tdd2">床罩(薄)、被罩(薄)、枕芯</view>
+                <view class="tdd2">太空被(小)、空调被、床罩(厚)、被罩(厚)</view>
+                <view class="tdd2">毛毯双层(小)、太空被(中)、羽绒被(小)、亚麻席</view>
+                <view class="tdd2">毛毯双层(大)、纯毛毛毯、羽绒被(中)、太空被(大)</view>
+                <view class="tdd2">羽绒被(大)、毛毯(加厚加宽)</view>
+                <view class="tdd2">桑蚕丝被、羊毛被、桑蚕类家居</view>
+                <view class="tdd2">毛绒玩具等</view>
+                <view class="tdd2 border-none">皮毛毯等</view>
+            </view>
+            <!-- <view class="td width1 td_center">60分钟</view> -->
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width3">
+                <view class="tdd2">12</view>
+                <view class="tdd2">20</view>
+                <view class="tdd2">30</view>
+                <view class="tdd2 border-none">60</view>
+            </view>
+            <view class="td width3 td_center">元/位</view>
+            <view class="td width4">
+                <view class="tdd2">汽车座套(棉质)等</view>
+                <view class="tdd2">沙发套、汽车座套</view>
+                <view class="tdd2">药物垫、亚麻垫、四季垫</view>
+                <view class="tdd2 border-none">汽车座套/垫(纯羊毛、真皮)</view>
+            </view>
+            <!-- <view class="td width1 td_center">60分钟</view> -->
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width3">
+                <view class="tdd2">6</view>
+                <view class="tdd2">8-10</view>
+                <view class="tdd2">8</view>
+                <view class="tdd2">50</view>
+                <view class="tdd2 border-none">100起</view>
+            </view>
+            <view class="td width3 td_center">元/平方</view>
+            <view class="td width4">
+                <view class="tdd2">窗帘(薄纱)</view>
+                <view class="tdd2">窗帘(普通)(工艺窗帘另算)</view>
+                <view class="tdd2">桌布、台布等</view>
+                <view class="tdd2">腈纶地毯、混纺地毯等</view>
+                <view class="tdd2 border-none">工艺挂毯、真丝地毯、羊毛地毯等</view>
+            </view>
+            <!-- <view class="td width1 td_center">60分钟</view> -->
+        </view>
+    </view>
+
+    <view style='margin-top:30rpx;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding-left:2%;padding-right:2%;font-size:28rpx;padding-bottom:20rpx;'>
+        <text>注意事项:</text>
+        <text>1.汽车座套、垫类，没有靠背的减价30%.</text>
+        <text>2.长2.2M宽(小于1.5M为小、大于或等于1.5M小于2M为中、大于或等于2Mx小于2.5M为大),非标准尺寸另行议价.</text>
+    </view>
+</view>
+
+<!-- 服饰洗涤类 -->
+<view wx:elif="{{type == 3}}" >
+    <view class="table" style='margin-top:60rpx;'>
+        <view class="tr tr_title">鞋类洗涤价格</view>
+        <view class="tr bg-w">
+            <view class="th width5">款式</view>
+            <view class="th width5">价格(元/双)</view>    
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width5 td_center">布鞋、旅游</view>
+            <view class="td width5 td_center">20</view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width5 td_center">光面皮鞋</view>
+            <view class="td width5 td_center">25</view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width5 td_center">光面中靴</view>
+            <view class="td width5 td_center">35</view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width5 td_center">光面长靴</view>
+            <view class="td width5 td_center">50</view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width5 td_center">磨砂皮靴</view>
+            <view class="td width5 td_center">80起</view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width5 td_center">翻毛鞋</view>
+            <view class="td width5 td_center">50起</view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width5 td_center">补色(局部)</view>
+            <view class="td width5 td_center">80起</view>
+        </view>
+    </view>
+</view>
+
+<!-- 包类 -->
+<view wx:elif="{{type == 4}}" >
+    <view class="table" style='margin-top:60rpx;'>
+        <view class="tr tr_title">包类洗涤价格</view>
+        <view class="tr bg-w">
+            <view class="th width6">价格</view>
+            <view class="th width6">项目</view>
+            <view class="th width6">时长</view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width6 td_center">普通包类</view>
+            <view class="td width6">
+            <view class="tdd2">大包</view>
+            <view class="tdd2">中包</view>
+            <view class="tdd2">挎包</view>
+            <view class="tdd2 border-none">大包</view>
+            </view>
+            <!-- <view class="td width1 td_center">件</view> -->
+            <view class="td width6">
+            <view class="tdd2">60元起</view>
+            <view class="tdd2">100元起</view>
+            <view class="tdd2">150元起</view>
+            <view class="tdd2 border-none">220元起</view>
+            </view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width6 td_center">奢侈品包类</view>
+            <view class="td width6">
+                <view class="tdd2">奢侈品钱包</view>
+                <view class="tdd2">奢侈品小包</view>
+                <view class="tdd2">奢侈品中包</view>
+                <view class="tdd2 border-none">奢侈品大包</view>
+            </view>
+            <!-- <view class="td width1 td_center">件</view> -->
+            <view class="td width6">
+                <view class="tdd2">150元起</view>
+                <view class="tdd2">200元起</view>
+                <view class="tdd2">300元起</view>
+                <view class="tdd2 border-none">400元起</view>
+            </view>
+        </view>
+    </view>
+</view>
+    
+
+<!-- 染色类 width7（20） width8(40) -->
+<view wx:elif="{{type == 6}}" >
+    <view class="table" style='margin-top:60rpx;'>
+        <view class="tr tr_title">
+            染色类衣物价格[以件为单位]
+        </view>
+        <view class="tr bg-w">
+            <view class="th width7">价格</view>
+            <view class="th width8">单位</view>
+            <view class="th width8">项目</view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width7">
+            <view class="tdd2">60</view>
+            <view class="tdd2">80</view>
+            <view class="tdd2 border-none">100</view>
+            </view>
+            <!-- <view class="td width1 td_center">件</view> -->
+            <view class="td width8 td_center">纯棉、纯涤类</view>
+            <view class="td width8">
+                <view class="tdd2">裤子、恤衫</view>
+                <view class="tdd2">上衣</view>
+                <view class="tdd2 border-none">风衣、大衣</view>
+            </view>
+            <!-- <view class="td width1 td_center">60分钟</view> -->
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width7">
+                <view class="tdd2">90</view>
+                <view class="tdd2">120</view>
+                <view class="tdd2 border-none">150</view>
+            </view>
+            
+            <view class="td width8 td_center">羊毛、混纺类</view>
+            <view class="td width8">
+                <view class="tdd2">裤子</view>
+                <view class="tdd2">上衣、羊毛衫</view>
+                <view class="tdd2 border-none">风衣、大衣</view>
+            </view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width7">
+                <view class="tdd2">150</view>
+                <view class="tdd2">200</view>
+                <view class="tdd2 border-none">260</view>
+            </view>
+            <view class="td width8 td_center">真丝类</view>
+            <view class="td width8">
+                <view class="tdd2">T恤衫、围巾</view>
+                <view class="tdd2">裙子</view>
+                <view class="tdd2 border-none">大衣</view>
+            </view>
+            <!-- <view class="td width1 td_center">60分钟</view> -->
+        </view>
+    </view>
+
+    <view style='margin-top:30rpx;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding-left:2%;padding-right:2%;font-size:28rpx;padding-bottom:20rpx;'>
+        <text>注意事项:</text>
+        <text>1.羽绒服类不染.</text>
+        <text>2.涤纶类染过后会比较皱.</text>
+        <text>3.毛料、混纺染过后会有不同尺寸的缩小.</text>
+        <text>4.84烧伤需要加10元.</text>
+    </view>
+</view>
+<!-- 皮草、去渍、织补、染色类 width9:25-->
+<view wx:elif="{{type == 5}}">
+    <view class="table" style='margin-top:60rpx;'>
+    <view class="tr tr_title">皮草、去渍、织补、染色类[按件收费]</view>
+    <view class="tr bg-w">
+        <view class="th width9">皮种</view>
+        <view class="th width9">款式</view>
+        <view class="th width9">基础护理</view>
+        <view class="th width9">专家护理</view>
+    </view>
+    <view class='tr' style='font-size:24rpx;'>
+        <view class="td width9 td_center">光面皮衣</view>
+        <view class="td width9">
+            <view class="tdd2">大衣</view>
+            <view class="tdd2">中娄</view>
+            <view class="tdd2">西装/夹克</view>
+            <view class="tdd2">西裤</view>
+            <view class="tdd2">长裙</view>
+            <view class="tdd2">短裙/马夹</view>
+            <view class="tdd2 border-none">手套/副</view>
+        </view>
+        <view class="td width9">
+            <view class="tdd2">280</view>
+            <view class="tdd2">240</view>
+            <view class="tdd2">200</view>
+            <view class="tdd2">120</view>
+            <view class="tdd2">120</view>
+            <view class="tdd2">80</view>
+            <view class="tdd2 border-none">60</view>
+        </view>
+        <view class="td width9">
+            <view class="tdd2">560</view>
+            <view class="tdd2">480</view>
+            <view class="tdd2">400</view>
+            <view class="tdd2">240</view>
+            <view class="tdd2">240</view>
+            <view class="tdd2">160</view>
+            <view class="tdd2 border-none">120</view>
+        </view>
+    </view>
+    <view class='tr' style='font-size:24rpx;'>
+        <view class="td width9 td_center">珠光皮衣</view>
+        <view class="td width9">
+            <view class="tdd2">大衣</view>
+            <view class="tdd2 border-none">西装/外套</view>
+        </view>
+        
+        <view class="td width9">
+            <view class="tdd2">380</view>
+            <view class="tdd2 border-none">300</view>
+        </view>
+        <view class="td width9">
+            <view class="tdd2">760</view>
+            <view class="tdd2 border-none">600</view>
+        </view>
+    </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width9 td_center">磨砂皮衣</view>
+            <view class="td width9">
+                <view class="tdd2">大衣</view>
+                <view class="tdd2">中娄</view>
+                <view class="tdd2">西装/夹克</view>
+                <view class="tdd2">西裤/长裙</view>
+                <view class="tdd2 border-none">短裙/马夹</view>
+            </view>
+            
+            <view class="td width9">
+                <view class="tdd2">420</view>
+                <view class="tdd2">360</view>
+                <view class="tdd2">280</view>
+                <view class="tdd2">180</view>
+                <view class="tdd2 border-none">120</view>
+            </view>
+            <view class="td width9">
+                <view class="tdd2">840</view>
+                <view class="tdd2">720</view>
+                <view class="tdd2">560</view>
+                <view class="tdd2">360</view>
+                <view class="tdd2 border-none">240</view>
+            </view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width9 td_center">毛革两用</view>
+            <view class="td width9">
+                <view class="tdd2">大衣</view>
+                <view class="tdd2">中娄</view>
+                <view class="tdd2">外套</view>
+                <view class="tdd2">兔毛外套(小)</view>
+                <view class="tdd2 border-none">毛皮背心</view>
+            </view>
+            <view class="td width9">
+                <view class="tdd2">260</view>
+                <view class="tdd2">240</view>
+                <view class="tdd2">220</view>
+                <view class="tdd2">160</view>
+                <view class="tdd2 border-none">120</view>
+            </view>
+            <view class="td width9">
+                <view class="tdd2">520</view>
+                <view class="tdd2">480</view>
+                <view class="tdd2">440</view>
+                <view class="tdd2">320</view>
+                <view class="tdd2 border-none">240</view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 毛领围巾 裘皮 -->
+    <view class="table" style='margin-top:60rpx;'>
+        
+        <view class="tr bg-w">
+            <view class="th width7">皮种</view>
+            <view class="th width8">款式</view>
+            <view class="th width8">干洗</view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width7 td_center">毛领围巾</view>
+            <view class="td width8">
+                <view class="tdd2">毛领(立领)</view>
+                <view class="tdd2">小毛领(18寸以下)</view>
+                <view class="tdd2">中毛领(18寸以上)</view>
+                <view class="tdd2">大毛领</view>
+                <view class="tdd2">狐狸围巾</view>
+                <view class="tdd2 border-none">毛袖(袖头/只)</view>
+            </view>
+            <view class="td width8">
+                <view class="tdd2">20</view>
+                <view class="tdd2">30</view>
+                <view class="tdd2">40</view>
+                <view class="tdd2">50</view>
+                <view class="tdd2">160</view>
+                <view class="tdd2 border-none">10</view>
+            </view>
+        </view>
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width7 td_center">裘皮</view>
+            <view class="td width8">
+                <view class="tdd2">长大衣</view>
+                <view class="tdd2">短大衣</view>
+                <view class="tdd2 border-none">披肩</view>
+            </view>
+            <view class="td width8">
+                <view class="tdd2">700</view>
+                <view class="tdd2">500</view>
+                <view class="tdd2 border-none">280</view>
+            </view>
+        </view>
+    </view>
+    <!-- 特殊项目 -->
+    <view class="table" style='margin-top:60rpx;'>    
+        <!-- <view class="tr bg-w">
+            <view class="th width7">皮种</view>
+            <view class="th width8">款式</view>
+            <view class="th width8">干洗</view>
+        </view> -->
+        <view class='tr' style='font-size:24rpx;'>
+            <view class="td width7 td_center">特殊项目</view>
+            <view class="td width8">
+                <view class="tdd2">皮衣粘补/寸</view>
+                <view class="tdd2">布衣织补/寸</view>
+                <view class="tdd2">换拉链/绣花</view>
+                <view class="tdd2">皮衣去膜</view>
+                <view class="tdd2">皮衣裂面修复</view>
+                <view class="tdd2">皮衣泅浆封闭层</view>
+                <view class="tdd2">去渍</view>
+                <view class="tdd2">百褶裙单烫</view>
+                <view class="tdd2">包缸</view>
+                <view class="tdd2">羊毛衫放大</view>
+                <view class="tdd2 border-none">染色衣物</view>
+            </view>
+            <view class="td width8">
+                <view class="tdd2">20(按周长计)</view>
+                <view class="tdd2">20(按周长计)</view>
+                <view class="tdd2">50-80起</view>
+                <view class="tdd2">180</view>
+                <view class="tdd2">160</view>
+                <view class="tdd2">150</view>
+                <view class="tdd2">白色60起/有色80起</view>
+                <view class="tdd2">0.5元/褶</view>
+                <view class="tdd2">300元/缸</view>
+                <view class="tdd2">30</view>
+                <view class="tdd2 border-none">60起</view>
+            </view>
+        </view>
+    </view>
+
+    <view style='padding-left:2%;padding-right:2%;font-size:28rpx;margin-top:30rpx;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding-bottom:20rpx;'>
+        <text>注意事项:</text>
+        <text>1.特殊项目不参与优惠活动.</text>
+        <text>2.裘皮分类中，长大衣指90CM以上含90CM,短大衣指90CM以下.</text>
+        <text>3.特殊分类中，包缸是指不超过10件或不超过8公斤.</text>
+    </view>
+</view>

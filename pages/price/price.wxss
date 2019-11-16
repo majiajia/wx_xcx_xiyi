@@ -1,0 +1,100 @@
+.table {
+   border-bottom: 1rpx solid #555; 
+  /* position: absolute;
+  top: 50rpx; */
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 96%;
+  font-size: 14px;
+}
+ 
+.tr {
+  display: flex;
+  width: 100%;
+  border-top: 1rpx solid #555;
+  border-left: 1rpx solid #555;
+  color: #555;
+  box-sizing: border-box;
+}
+.tr_title{
+  display:block;
+  text-align:center;
+  padding:20rpx 0;
+  border-right: 1px solid #333;
+}
+.td {
+  width: 20%;
+  justify-content: center;
+  text-align: center;
+  border-right: 1rpx solid #555;
+  padding: 20rpx 0;
+}
+ 
+.th {
+  justify-content: center;
+  display: flex;
+  height: 3rem;
+  align-items: center;
+  color: #555;
+  border-right: 1rpx solid #555;
+}
+ 
+.td_center {
+  display: flex;
+  align-items: center;
+}
+ 
+.tdd2 {
+  border-bottom: 1px solid #333;
+  padding: 4px;
+}
+ 
+.width1 {
+  width: 16%;
+}
+ 
+.width2 {
+  width: 84%;
+}
+ 
+/* 用于显示家居类的三列 */
+.width3 {
+  width: 20%;
+}
+ 
+.width4 {
+  width: 60%;
+}
+/* 用于鞋的两列 */
+.width5 {
+  width: 50%;
+}
+/* 用于包的平均三列 */
+.width6 {
+  width: 33%;
+}
+
+/* 用于染色类的三列 */
+.width7 {
+  width: 20%;
+}
+.width8 {
+  width: 40%;
+}
+
+/* 用于皮草 去渍 织补 染色类 */
+.width9 {
+  width: 25%;
+}
+.width10 {
+  width: 50%;
+}
+
+.bg-g {
+  background: #e6f3f9;
+}
+ 
+.border-none {
+  border: none;
+}

@@ -1,0 +1,88 @@
+<!--pages/huodong/huodong.wxml-->
+<!-- 上面显示目前正在进行的充值返活动, -->
+<view style='display:flex;flex-direction:column;width:100%;'>
+    <!-- 活动介绍 -->
+    <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;'>
+        <text style='margin-top:20rpx;margin-bottom:20rpx;'>充值后洗衣打折优惠进行中,快来参加呀</text>
+        <text style='padding-left:8rpx;padding-right:8rpx;font-size:32rpx;'>为庆祝大型洗衣连锁企业康洁洗衣(美林河畔店)正式开业,特举行充值后洗衣打折活动,充值金额可用于本店洗衣消费。</text>
+        <text style='margin-top:20rpx;margin-bottom:10rpx;'>请选择参加的活动类型:</text>
+        
+        <block wx:if="{{cur_active_type == 1}}">
+            <form report-submit bindsubmit="take_huodong">
+                <radio-group bindchange="checkboxChange" style="width:100%;" name="type">
+                    <view wx:for="{{huodong_cfg_list}}" wx:for-item="huodong_cfg_item">
+                        <block wx:if="{{huodong_cfg_item.pay_real > 0}}">
+                            <view style='width:100%; display:flex;flex-direction:row;justify-content:space-around;padding-top:12rpx;padding-bottom:12rpx;'>
+                                充{{huodong_cfg_item.pay_real}}送{{huodong_cfg_item.gift}} =  {{huodong_cfg_item.discount}}折
+                                <block wx:if="{{huodong_cfg_item.type == 1}}">
+                                    <radio value="{{huodong_cfg_item.type}}" checked />
+                                </block>
+                                <block wx:else>
+                                    <radio value="{{huodong_cfg_item.type}}" />
+                                </block>
+                            </view>
+                        </block>
+                    </view>
+                    <!-- <view style='width:100%; display:flex;flex-direction:row;justify-content:space-around;padding-top:12rpx;padding-bottom:12rpx;'>
+                充1000送500 = 6.6折<radio value="2" />
+            </view>
+            <view style='width:100%; display:flex;flex-direction:row;justify-content:space-around;padding-top:12rpx;padding-bottom:12rpx;'>
+                充1000送500 = 6.6折<radio value="3" />
+            </view> -->
+                </radio-group>
+                <view style='display:flex;flex-direction:row;margin-top:12rpx;margin-bottom:12rpx;'>
+                    手机号:
+                    <input type='number' name="phone" placeholder='请输入手机号'></input>
+                </view>
+                <view style='display:none;'>
+                    <input type='number' name="cur_active_type" value="1"></input>
+                </view>
+                
+                <button form-type="submit">我要参加</button>
+            </form>
+        </block>
+        <block wx:if="{{cur_active_type == 2}}">
+            <form report-submit bindsubmit="take_huodong">
+                <radio-group bindchange="checkboxChange" style="width:100%;" name="type">
+                    <view wx:for="{{huodong_cfg_list}}" wx:for-item="huodong_cfg_item">
+                        <block wx:if="{{huodong_cfg_item.pay > 0}}">
+                            <view style='width:100%; display:flex;flex-direction:row;justify-content:space-around;padding-top:12rpx;padding-bottom:12rpx;'>
+                                充{{huodong_cfg_item.pay}} =  洗衣{{huodong_cfg_item.account}}折 + 赠送{{huodong_cfg_item.fan_num}}元
+                                <block wx:if="{{huodong_cfg_item.type == 1}}">
+                                    <radio value="{{huodong_cfg_item.type}}" checked />
+                                </block>
+                                <block wx:else>
+                                    <radio value="{{huodong_cfg_item.type}}" />
+                                </block>
+                            </view>
+                        </block>
+                    </view>
+                    <!-- <view style='width:100%; display:flex;flex-direction:row;justify-content:space-around;padding-top:12rpx;padding-bottom:12rpx;'>
+                充1000送500 = 6.6折<radio value="2" />
+            </view>
+            <view style='width:100%; display:flex;flex-direction:row;justify-content:space-around;padding-top:12rpx;padding-bottom:12rpx;'>
+                充1000送500 = 6.6折<radio value="3" />
+            </view> -->
+                </radio-group>
+                <view style='display:flex;flex-direction:row;margin-top:12rpx;margin-bottom:12rpx;'>
+                    手机号:
+                    <input type='number' name="phone" placeholder='请输入手机号'></input>
+                </view>
+                <view style='display:none;'>
+                    <input type='number' name="cur_active_type" value="2"></input>
+                </view>
+                <button form-type="submit">我要参加</button>
+            </form>
+        </block>
+
+    </view>
+
+    <view style='display:flex;flex-direction:column;padding-left:4rpx;width:100%;font-size:32rpx;margin-top:20rpx;'>
+        <text>说明:</text>
+        <text>1、充值金额只可用于本店的洗衣消费金额;</text>
+        <text>2、充值后可立即在在我的余额中查看;</text>
+        <text>3、充值余额无使用期限限制;</text>
+        <text>4、洗衣折扣无使用期限限制;</text>
+        <text bindtap='make_phone'>4、其他未尽事宜请电话咨询 <text style="color:red;">13271550099</text>;</text>
+    </view>
+</view>

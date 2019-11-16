@@ -1,0 +1,42 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/me/me",
+        "pages/price/price",
+        "pages/reserve/reserve",
+        "pages/huodong/huodong",
+        "pages/service_flow/service_flow",
+        "pages/bill/bill",
+        "pages/manage_bill/manage_bill",
+        "pages/manage/manage"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "康洁洗衣",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "color": "black",
+        "selectedColor": "#111",
+        "backgroundColor": "white",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "首页",
+                "iconPath": "./imgs/tab/home.png"
+            },
+            {
+                "pagePath": "pages/price/price",
+                "text": "价目",
+                "iconPath": "./imgs/tab/jiamu.png"
+            },
+            {
+                "pagePath": "pages/me/me",
+                "text": "我的",
+                "iconPath": "./imgs/tab/me.png"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json"
+}

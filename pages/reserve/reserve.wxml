@@ -1,0 +1,77 @@
+<!-- 点击首页的预约取件后,会跳转到这个页面
+需要用户填写姓名/电话/地址,支付定金10元,可抵扣洗衣金额
+-->
+
+<!-- background-color:#F7F7F7; -->
+<form report-submit bindsubmit="pre_order">
+    <view style='width:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;'>
+        <view style='width:94%;display:flex;flex-direction:row;align-items:center; border-bottom:1rpx solid grey;padding-top:16rpx;padding-bottom:16rpx;padding-left:16rpx;'>
+            <image style='width:48rpx;height:48rpx;' src='../../imgs/icon/name.png'></image>
+            <input type='text' placeholder='姓名' placeholder-style='color:grey;'  name="name"></input>
+        </view>
+        
+        <view style='width:94%;display:flex;flex-direction:row;align-items:center; border-bottom:1rpx solid grey;padding-top:16rpx;padding-bottom:16rpx;padding-left:16rpx;'>
+            <image style='width:48rpx;height:48rpx;' src='../../imgs/icon/phone.png'></image>
+            <input type='number' placeholder='手机号' placeholder-style='color:grey;' name="phone"></input>
+        </view>
+        <view style='width:94%;display:flex;flex-direction:row;align-items:center; border-bottom:1rpx solid grey;padding-top:16rpx;padding-bottom:16rpx;padding-left:16rpx;'>
+            <image style='width:48rpx;height:48rpx;' src='../../imgs/icon/address.png'></image>
+            <input type='text' placeholder='地址' placeholder-style='color:grey;'  name="address"></input>
+        </view>
+        
+        <view style='width:94%;display:flex;flex-direction:row;align-items:center; border-bottom:1rpx solid grey;padding-top:16rpx;padding-bottom:16rpx;padding-left:16rpx;'>
+            <image style='width:48rpx;height:48rpx;' src='../../imgs/icon/time.png'></image>
+            <text>上门时间：下午5:00-8:00</text>
+        </view>
+
+        <view style='width:94%;display:flex;flex-direction:row;align-items:center; border-bottom:1rpx solid grey;padding-top:16rpx;padding-bottom:16rpx;padding-left:16rpx;'>
+            <image style='width:48rpx;height:48rpx;' src='../../imgs/icon/remark.png'></image>
+            <input type='text' placeholder='备注' placeholder-style='color:grey;'  name="remark"></input>
+        </view>
+
+        <view style='width:94%;display:flex;flex-direction:row;align-items:center;justify-content:space-between; border-bottom:1rpx solid grey;padding-top:16rpx;padding-bottom:16rpx;padding-left:16rpx;'>
+            <text>预付定金(可抵扣洗衣款):</text>
+            <text style='color:red;'>10元</text>
+        </view>
+        
+        <!-- 选择支付方式 -->
+        <view style='width:94%;display:flex;flex-direction:column;margin-top:32rpx;margin-bottom:20rpx;'>
+            <text>请选择您的支付方式:</text>
+            <radio-group style="display:flex;flex-direction:column;" bindchange="check_change" name="type">
+                <block wx:if="{{user_cur_balance >= 10}}">
+                    <div style="display:flex;flex-direction:row;justify-content:space-between;">
+                        余额支付(余额:{{user_cur_balance}}元)
+                        <radio value="1" checked></radio>
+                    </div>
+                    <div style="display:flex;flex-direction:row;justify-content:space-between;">
+                        微信支付
+                        <radio value="2"></radio>
+                    </div>
+                </block>
+                <block wx:if="{{user_cur_balance < 10}}">
+                    <div style="display:flex;flex-direction:row;justify-content:space-between;">
+                        余额支付(余额:{{user_cur_balance}}元)
+                        <radio value="1" ></radio>
+                    </div>
+                    <div style="display:flex;flex-direction:row;justify-content:space-between;">
+                        微信支付
+                        <radio value="2" checked></radio>
+                    </div>
+                </block>
+            </radio-group>
+        </view>
+
+        <view style='width:94%;display:flex;flex-direction:row;justify-content:center;align-items:center;background-color:white;border-radius:8rpx;'>
+            <button style='color:white;background-color:#12B8F6;padding:8rpx;border-radius:8rpx;' form-type="submit">立即支付</button>
+        </view>
+    </view>
+</form>
+<view>
+    <!-- 注意事项 -->
+    <view style='padding-left:2%;padding-right:2%;display:flex;flex-direction:column;margin-top:36rpx;margin-bottom:8rpx;font-size:32rpx;'>
+        <text>注意事项:</text>
+        <text>1.洗衣款由配送员上门收衣服时按照价目表收取,支持余额支付和微信支付;</text>
+        <text>2.预付的定金可用于抵扣洗衣款.若配送员达到指定地址后,无法与你取得联系,则定金作为上门服务费不再退还;</text>
+        <text>3.其他未尽事宜请直接电话咨询:13271550099</text>
+    </view>
+</view>

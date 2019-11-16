@@ -1,0 +1,4 @@
+.line-style {
+    padding-left:12rpx;
+    padding-right:12rpx;
+}

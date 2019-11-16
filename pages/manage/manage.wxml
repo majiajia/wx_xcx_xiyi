@@ -1,0 +1,169 @@
+<!-- 进入管理界面 -->
+<!-- 显示待上门取衣的单子 可设置已取单-->
+<!-- 显示当前所有已充值用户的余额 -->
+<view style='display:flex;flex-direction:row;justify-content:space-around;align-items:center;border-bottom:1rpx solid #333;padding-bottom:4rpx;'>
+    <view bindtap='show' data-type='1'>
+        <block wx:if="{{type == 1}}">
+            <text style='color:blue;'>洗衣单</text>
+        </block>
+        <block wx:else>
+            <text>洗衣单</text>
+        </block>
+    </view>
+    |
+    <view bindtap='show' data-type='2'>
+        <block wx:if="{{type == 2}}">
+            <text style='color:blue;'>用户的余额</text>
+        </block>
+        <block wx:else>
+            <text>用户的余额</text>
+        </block>
+    </view>
+    |
+    <view bindtap='show' data-type='3'>
+        <block wx:if="{{type == 3}}">
+            <text style='color:blue;'>充值送活动配置</text>
+        </block>
+        <block wx:else>
+            <text>充值送活动配置</text>
+        </block>
+    </view>
+</view>
+<!-- 显示用户的单子 未取的单子显示在前面、已取的单子放后面，店员可设置单子已取 -->
+<view wx:if="{{type == 1}}">
+    <view style='display:flex;flex-direction:column;width:100%;'>
+        <block wx:if="{{user_order_count <= 0}}">
+            <view style="display:flex;flex-direction:row;justify-content:center;align-items:center;">
+                <text>还没有订单</text>
+            </view>
+        </block>
+        <block wx:else>
+            <block wx:for="{{user_order_list}}" wx:for-item="user_order_item">
+                <form report-submit bindsubmit="confirm_order">
+                    <view style='display:flex;flex-direction:column;padding-left:2%;padding-right:2%;border-bottom:1rpx solid #555;padding-top:4rpx;padding-bottom:12rpx;'>
+                        <text>{{user_order_item.address}}</text>
+                        <text>{{user_order_item.name}}({{user_order_item.user_id}})</text>
+                        <text bindtap='make_phone' data-phone="{{user_order_item.phone}}">{{user_order_item.phone}}</text>
+                        <text style='color:red;font-size:32rpx;'>{{user_order_item.remark}}</text>
+                        <input type="text" name="order_id" value="{{user_order_item.order_id}}" style="display:none;" />
+                        <!-- 若已取单,则显示取单时间;若未取单,则显示取单按钮; -->
+                        <view wx:if="{{user_order_item.status == 1}}">
+                            <button form-type="submit">取单</button>
+                        </view>
+                        <view wx:if="{{user_order_item.status == 2}}">
+                            <text>取单时间:{{user_order_item.time}}</text>
+                        </view>
+                    </view>
+                </form>
+            </block>
+        </block>
+    </view>
+</view>
+<!-- 显示用户的余额： 昵称 编号 电话 余额 -->
+<view wx:if="{{type == 2}}">
+    <view style='display:flex;flex-direction:column;padding-left:2%;padding-right:2%;'>
+        <block wx:if="{{user_balance_count <= 0}}">
+            <view style="display:flex;flex-direction:row;justify-content:center;align-items:center;">
+                <text>尚未有用户充值</text>
+            </view>
+        </block>
+        <block wx:else>
+            <block wx:for="{{user_balance_list}}" wx:for-item="user_balance_item">
+                <view style='display:flex;flex-direction:row;justify-content:space-between;align-items:center;border-bottom:1rpx solid #333;' bindtap="nav_manage_user_bill" data-user-id="{{user_balance_item.user_id}}">
+                    <view style='display:flex;flex-direction:column;'>
+                        <view style='display:flex;flex-direction:row;'>
+                            <text>{{user_balance_item.name}}</text>
+                            <text>( {{user_balance_item.user_id}}  )</text>
+                        </view>
+                        <text data-phone="{{user_balance_item.phone}}" bindtap="make_phone">{{user_balance_item.phone}}</text>
+                    </view>
+                    <view style='display:flex;flex-direction:row;'>
+                        <text>{{user_balance_item.cur_balance}}</text>
+                    </view>
+                </view>
+            </block>
+        </block>
+    </view>
+</view>
+
+<!-- 充值送的活动配置 -->
+<view wx:if="{{type == 3}}" style='display:flex;flex-direction:column;padding-left:3%;padding-right:3%;'>
+    <view style="display:flex;flex-direction:row;justify-content:center;align-items:center;">
+        <block wx:if="{{sys_cfg_active_type == 1}}">
+            <text style='color:red;'>充值送活动配置(启用)</text>
+        </block>
+        <block wx:else>
+            <text>充值送活动配置(未启用)</text>
+        </block>
+    </view>
+    <form report-submit bindsubmit="confirm_save_save_activity_cfg">
+        <view style='display:flex;flex-direction:row;justify-content:space-between;align-items:center;'>
+            <text>充</text>
+            <input placeholder='{{pay_real_1}}' name="pay_real_1"></input>
+            <text>送</text>
+            <input placeholder='{{gift_1}}'  name="gift_1"></input>
+            =
+            <input placeholder='{{discount_1}}'  name="discount_1"></input>
+            折
+        </view>
+        <view style='display:flex;flex-direction:row;'>
+            <text>充</text>
+            <input placeholder='{{pay_real_2}}' name="pay_real_2"></input>
+            <text>送</text>
+            <input placeholder='{{gift_2}}'  name="gift_2"></input>
+            =
+            <input placeholder='{{discount_2}}'  name="discount_2"></input>
+            折
+        </view>
+        <view style='display:flex;flex-direction:row;'>
+            <text>充</text>
+            <input placeholder='{{pay_real_3}}' name="pay_real_3"></input>
+            <text>送</text>
+            <input placeholder="{{gift_3}}"  name="gift_3"></input>
+            =
+            <input placeholder='{{discount_3}}'  name="discount_3"></input>
+            折
+        </view>
+        
+        <text>注意:只需要把要开启的活动填写上对应的金额,确认保存后,将按照上述配置开启活动</text>
+        <button form-type="submit">确定</button>
+    </form>
+
+    <div style="height:20rpx;">
+    </div>
+    <!-- 充值洗衣打折活动 -->
+    <form report-submit bindsubmit="confirm_save_account_activity_cfg" >
+        <view style="display:flex;flex-direction:row;justify-content:center;align-items:center;">
+            <block wx:if="{{sys_cfg_active_type == 2}}">
+                <text style='color:red;'>充值洗衣打折活动配置(启用)</text>
+            </block>
+            <block wx:else>
+                <text>充值洗衣打折活动配置(未启用)</text>
+            </block>
+        </view>
+        <view style='display:flex;flex-direction:row;justify-content:space-between;align-items:center;'>
+            <text>充</text>
+            <input type='number' placeholder='{{account_activity_pay_1}}' name="account_activity_pay_1"></input>
+            =
+            <input type='number' placeholder='{{account_activity_discount_1}}' name="account_activity_discount_1"></input>
+            折
+        </view>
+        <view style='display:flex;flex-direction:row;'>
+            <text>充</text>
+            <input type='number' placeholder='{{account_activity_pay_2}}' name="account_activity_pay_2"></input>
+            
+            =
+            <input  type='number' placeholder='{{account_activity_discount_2}}' name="account_activity_discount_2"></input>
+            折
+        </view>
+        <view style='display:flex;flex-direction:row;'>
+            <text>充</text>
+            <input  type='number' placeholder='{{account_activity_pay_3}}' name="account_activity_pay_3"></input>
+            =
+            <input type='number' placeholder='{{account_activity_discount_3}}' name="account_activity_discount_3"></input>
+            折
+        </view>
+        <text>注意:只需要把要对应数值填写确认保存后,将按照上述配置开启活动</text>
+        <button form-type="submit">确定</button>
+    </form>
+</view>

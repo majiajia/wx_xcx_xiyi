@@ -1,0 +1,11 @@
+<view style='display:flex;flex-direction:row;justify-content:center;align-items:center;margin-bottom:20rpx;margin-top:20rpx;'>
+    <text>服务流程-康洁洗衣</text>
+</view>
+<view style='padding-left:2%;padding-right:2%;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;'>
+    <text class=''>1.点击首页的"预约上门取衣"填写你的姓名、地址和电话以及你的要求,支付定金;</text>
+    <text class=''>2.配送员在指定时间段内到达你填写的地址与你联系,并按照价目表支付洗衣费用,定金抵扣洗衣费用;</text>
+    <text class=''>3.如配送员达到后,无法联系到你,则定金作为上门服务费用,不再退还;</text>
+    <text class=''>4.您通过充值的余额或微信支付向配送员支付相应费用,支付成功后,配送员妥善保管并取走您的衣物;</text>
+    <text class=''>5.衣物清洗完毕后,会通过电话与你联系送货上门或到店自取.</text>
+    <text bindtap="make_phone" data-phone="13271550099">6.更多请直接电话联系:13271550099</text>
+</view>

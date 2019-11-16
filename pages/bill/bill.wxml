@@ -1,0 +1,139 @@
+<!-- 这个页面显示余额的充值和消费记录 
+需要显示的内容:显示在这个小程序中支付的款项
+    余额的增加
+    支付定金(使用余额支付或微信支付)
+    支付洗衣款(使用余额支付或微信支付)
+
+时间-金额-用途-支付方式:
+       定金/洗衣费    20元
+    2018年11月12日   余额支付/支付支付  
+-->
+
+<view style="width:100%;display:flex;flex-direction:row;justify-content:space-around;align-items:center;padding-bottom:8rpx;">
+    <view wx:if="{{item1_selected}}" bindtap="show_user_bill" data-type="1" style="color:red;border-bottom:1rpx solid red;">
+        <text>参加活动</text>
+    </view>
+    <view wx:else bindtap="show_user_bill" data-type="1">
+        <text>参加活动</text>
+    </view>
+    |
+    <view wx:if="{{item2_selected}}" bindtap="show_user_bill"  data-type="2"  style="color:red;border-bottom:1rpx solid red;">
+        <text>预约支付</text>
+    </view>
+    <view wx:else bindtap="show_user_bill" data-type="2">
+        <text>预约支付</text>
+    </view>
+    |
+    <view wx:if="{{item3_selected}}" bindtap="show_user_bill" data-type="3" style="color:red;border-bottom:1rpx solid red;">
+        <text>洗衣支付</text>
+    </view>
+    <view wx:else bindtap="show_user_bill" data-type="3">
+        <text>洗衣支付</text>
+    </view>
+</view>
+
+<view wx:if="{{type == 1}}" style='padding-left:3%;padding-right:3%;display:flex;flex-direction:column;'>
+    <!--   用户参加活动的记录 :时间 实际支付 返 实际获得 状态 -->
+    <!-- <view style="display:flex;flex-direction:row;justify-content:space-around;align-items:center;">
+        <text>参加时间</text> |
+        <text>实际支付</text>  |
+        <text>赠送</text>|
+        <text>实际获得</text>  |
+        <text>状态</text>
+    </view> -->
+    <block wx:if="{{user_activity_count <= 0}}">
+        <view style="display:flex;flex-direction:row;justify-content:center;align-items:center;">
+            <text>还没有参加活动充值</text>
+        </view>
+    </block>
+    <block wx:else>
+        <block wx:for="{{user_activity_list}}" wx:for-item="user_activity_item">
+            <view style="display:flex;flex-direction:row;justify-content:space-around;align-items:center;font-size:32rpx;">
+                <text>{{user_activity_item.create_time}}</text>
+                支付:<text>{{user_activity_item.pay_real}}元</text>
+                <!-- 赠送:<text>{{user_activity_item.gift}}</text> -->
+                获得:<text>{{user_activity_item.get_real}}元</text>
+                <!-- <text>{{user_activity_item.status}}</text> -->
+            </view>
+        </block>
+
+        <block wx:for="{{user_account_activity_list}}" wx:for-item="user_account_activity_item">
+            <view style="display:flex;flex-direction:row;justify-content:space-around;align-items:center;font-size:32rpx;">
+                <text>{{user_account_activity_item.create_time}}</text>
+                支付:
+                <text>{{user_account_activity_item.pay}}元</text>
+                <!-- 赠送:<text>{{user_activity_item.gift}}</text> -->
+                获得:
+                <text>洗衣{{user_account_activity_item.account}}折</text>
+                <!-- <text>{{user_activity_item.status}}</text> -->
+            </view>
+        </block>
+
+    </block>
+</view>
+
+<view  wx:if="{{type == 2}}" style='padding-left:3%;padding-right:3%;display:flex;flex-direction:column;'>
+    <!-- 用户参加活动的记录 :时间 实际支付 返 实际获得 状态 -->
+    <view style="display:flex;flex-direction:row;justify-content:space-around;align-items:center;">
+        <!-- <text>时间</text>
+        |
+        <text>金额</text>
+        |
+        <text>支付方式</text>
+        |
+        <text>状态</text> -->
+    </view>
+    <block wx:if="{{user_order_count <= 0}}">
+        <view style="display:flex;flex-direction:row;justify-content:center;align-items:center;">
+            <text>还没有预约过</text>
+        </view>
+    </block>
+    <block wx:else>
+        <block wx:for="{{user_order_list}}" wx:for-item="user_order_item">
+            <view style="display:flex;flex-direction:row;justify-content:space-around;align-items:center;font-size:32rpx;">
+                <text>{{user_order_item.create_time}}</text>
+                <block wx:if="{{user_order_item.type == 1}}">
+                    <text>余额支付</text>
+                </block>
+                <block wx:else>
+                    <text>微信余额支付</text>
+                </block>
+                <text>{{user_order_item.pay}}元</text>
+                <!-- <text>{{user_order_item.status}}</text> -->
+            </view>
+        </block>
+    </block>
+</view>
+
+<view  wx:if="{{type == 3}}" style='padding-left:3%;padding-right:3%;display:flex;flex-direction:column;'>
+    <!-- 用户支付洗衣款的记录 :时间 实际支付 返 实际获得 状态 -->
+    <view style="display:flex;flex-direction:row;justify-content:space-around;align-items:center;">
+        <!-- <text>时间</text>
+        |
+        <text>金额</text>
+        |
+        <text>支付方式</text>
+        |
+        <text>状态</text> -->
+    </view>
+    <block wx:if="{{user_pay_count <= 0}}">
+        <view style="display:flex;flex-direction:row;justify-content:center;align-items:center;">
+            <text>还没有支付过洗衣款</text>
+        </view>
+    </block>
+    <block wx:else>
+        <block wx:for="{{user_pay_list}}" wx:for-item="user_pay_item">
+            <view style="display:flex;flex-direction:row;justify-content:space-around;align-items:center;font-size:32rpx;">
+                <text>{{user_pay_item.create_time}}</text>
+                <block wx:if="{{user_pay_item.type == 1}}">
+                    <text>余额支付</text>
+                </block>    
+                <block wx:else>
+                    <text>微信支付</text>
+                </block>    
+                <text>{{user_pay_item.pay}}元</text>
+                <!-- <text>{{user_pay_item.status}}</text> -->
+            </view>
+        </block>
+    </block>
+</view>

@@ -1,0 +1,84 @@
+<!--user.wxml-->
+<!-- 头像  昵称
+当前余额
+账单:余额的充值和消费记录
+付款:选择使用余额支付还是微信支付
+ -->
+<view style='width:100%;'>
+    <view class="userinfo">
+        <button wx:if="{{user_avatar == null}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" style='display:flex;flex-direction:column;justify-content:center;align-items:center;'>
+            <image class="userinfo-avatar" src="../../imgs/tab/me.png" mode="cover"></image>
+            <text class="userinfo-nickname"></text>
+        </button>
+        <block wx:else>
+            <image class="userinfo-avatar" src="{{user_avatar}}" mode="cover"></image>
+            <text class="userinfo-nickname">{{user_name}}</text>
+        </block>
+    </view>
+  
+    <view style="display:flex;flex-direction:row;justify-content:center;align-items:center;font-size:32rpx;">
+        <text style='font-size:28rpx;'>ID:{{user_id}}</text>
+    </view>
+
+    <view style='display:flex;flex-direction:row;justify-content:space-around;align-items:center;margin-top:20rpx;margin-bottom:20rpx;'>
+        <view style='width:50%;display:flex;flex-direction:column;justify-content:center;align-items:center;'>
+            <text>余额</text>
+            <text>{{cur_balance}}元</text>
+        </view>
+        |
+        <view style='width:50%;display:flex;flex-direction:column;justify-content:center;align-items:center;' bindtap='nav_to_bill'>
+            <image style='width:48rpx;height:48rpx;' src='../../imgs/icon/bill.png'></image>     
+            <text>查看账单</text>
+        </view>
+    </view>
+    <!-- 付款 -->
+    
+    <form report-submit bindsubmit="user_pay">
+        <view style='width:100%;display:flex;flex-direction:column;margin-top:32rpx;justify-content:center;align-items:center;'>
+            <block wx:if="{{user_pay_account < 10}}">
+                <text>支付洗衣款(享{{user_pay_account}}折优惠)</text>
+            </block>
+            <block wx:if="{{user_pay_account == 10}}">
+                <text>支付洗衣款</text>
+            </block>
+            
+            <input name="pay" value="{{user_pay_val}}" type='digit' placeholder='请输入支付金额' placeholder-style='text-align:center;' style='text-align:center;border:1rpx solid #12B8F5;margin-top:12rpx;margin-bottom:12rpx;'></input>
+
+            <radio-group style="display:flex;flex-direction:column;width:94%;" name="type">
+                <block wx:if="{{cur_balance <= 0}}">
+                    <view style='display:flex;flex-direction:row;justify-content:space-between;'>
+                        余额支付(余额:{{cur_balance}}元)
+                        <radio value='1' ></radio>
+                    </view>
+                    <view style='display:flex;flex-direction:row;justify-content:space-between;'>
+                        微信支付
+                        <radio value='2' checked></radio>
+                    </view>
+                </block>
+                <block wx:if="{{cur_balance > 0}}">
+                    <view style='display:flex;flex-direction:row;justify-content:space-between;'>
+                        余额支付(余额:{{cur_balance}}元)
+                        <radio value='1' checked></radio>
+                    </view>
+                    <view style='display:flex;flex-direction:row;justify-content:space-between;'>
+                        微信支付
+                        <radio value='2' ></radio>
+                    </view>
+                </block>
+            </radio-group>
+
+            <button style='color:white;background-color:#12B8F5;' form-type="submit">确认支付</button>
+        </view>
+    </form>
+    
+
+    <view wx:if="{{is_admin == 1}}" style='display:flex;flex-direction:row;justify-content:center;align-items:center;margin-top:80rpx;margin-bottom:28rpx;'>
+        <text bindtap='nav_to_manage'>进入管理界面</text>
+    </view>
+    <!-- 显示客服电话 服务时间和地址 -->
+    <view style='width:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;position:fixed;bottom:20rpx;color:black;font-size:32rpx;font-size:28rpx;'>
+        <text bindtap='make_phone'>服务热线:13271550099</text>
+        <text>服务时间:9:00-19:00</text>
+        <text >郑州市航海路与中州大道交叉口美林河畔康洁洗衣</text>
+    </view>
+</view>
